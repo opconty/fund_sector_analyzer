@@ -1,0 +1,900 @@
+{
+  "半导体": {
+    "name": "半导体",
+    "funds": [
+      {
+        "code": "159813",
+        "name": "半导体ETF",
+        "type": "ETF",
+        "tracker": "国证半导体芯片指数",
+        "scale": "120亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512480",
+        "name": "半导体ETF",
+        "type": "ETF",
+        "tracker": "中华半导体芯片指数",
+        "scale": "85亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "008887",
+        "name": "中证半导体产业ETF联接A",
+        "type": "场外",
+        "tracker": "中证半导体指数",
+        "scale": "50亿",
+        "expense": "1.20%"
+      },
+      {
+        "code": "008888",
+        "name": "中证半导体产业ETF联接C",
+        "type": "场外",
+        "tracker": "中证半导体指数",
+        "scale": "30亿",
+        "expense": "0.60%"
+      }
+    ]
+  },
+  "医药生物": {
+    "name": "医药生物",
+    "funds": [
+      {
+        "code": "512290",
+        "name": "医疗ETF",
+        "type": "ETF",
+        "tracker": "中证医疗指数",
+        "scale": "200亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159992",
+        "name": "创新药ETF",
+        "type": "ETF",
+        "tracker": "中证创新药指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "003095",
+        "name": "华宝大健康混合A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "40亿",
+        "expense": "1.50%"
+      },
+      {
+        "code": "014180",
+        "name": "招商医药健康产业A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "35亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "人工智能": {
+    "name": "人工智能",
+    "funds": [
+      {
+        "code": "515070",
+        "name": "人工智能ETF",
+        "type": "ETF",
+        "tracker": "中证人工智能指数",
+        "scale": "45亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512690",
+        "name": "计算机ETF",
+        "type": "ETF",
+        "tracker": "中证计算机主题指数",
+        "scale": "55亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001578",
+        "name": "前海开源人工智能主题混合A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "25亿",
+        "expense": "1.50%"
+      },
+      {
+        "code": "005913",
+        "name": "中金中证沪港深互联网A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "15亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "新能源": {
+    "name": "新能源",
+    "funds": [
+      {
+        "code": "516160",
+        "name": "新能源ETF",
+        "type": "ETF",
+        "tracker": "中证新能源指数",
+        "scale": "70亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "515790",
+        "name": "新能源车ETF",
+        "type": "ETF",
+        "tracker": "中证新能源汽车指数",
+        "scale": "90亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "011322",
+        "name": "汇添富新能源车指数A",
+        "type": "场外",
+        "tracker": "中证新能源汽车指数",
+        "scale": "30亿",
+        "expense": "1.20%"
+      },
+      {
+        "code": "003834",
+        "name": "前海开源沪港深核心资源混合A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "20亿",
+        "expense": "1.50%"
+      }
+    ]
+  },
+  "券商": {
+    "name": "券商",
+    "funds": [
+      {
+        "code": "512000",
+        "name": "证券ETF",
+        "type": "ETF",
+        "tracker": "中证全指证券公司指数",
+        "scale": "300亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512880",
+        "name": "证券公司ETF",
+        "type": "ETF",
+        "tracker": "中证全指证券公司指数",
+        "scale": "150亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "515770",
+        "name": "券商ETF",
+        "type": "ETF",
+        "tracker": "中证细分证券产业指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000513",
+        "name": "招商中证红利",
+        "type": "场外",
+        "tracker": "中证红利指数",
+        "scale": "100亿",
+        "expense": "0.60%"
+      }
+    ]
+  },
+  "银行": {
+    "name": "银行",
+    "funds": [
+      {
+        "code": "512800",
+        "name": "银行ETF",
+        "type": "ETF",
+        "tracker": "中证银行指数",
+        "scale": "180亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512660",
+        "name": "银行ETF基金",
+        "type": "ETF",
+        "tracker": "中证银行指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000213",
+        "name": "指数增强A",
+        "type": "场外",
+        "tracker": "中证银行指数",
+        "scale": "30亿",
+        "expense": "0.80%"
+      }
+    ]
+  },
+  "有色金属": {
+    "name": "有色金属",
+    "funds": [
+      {
+        "code": "512400",
+        "name": "有色金属ETF",
+        "type": "ETF",
+        "tracker": "中证有色金属指数",
+        "scale": "80亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159871",
+        "name": "稀有金属ETF",
+        "type": "ETF",
+        "tracker": "国证稀有金属指数",
+        "scale": "25亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001278",
+        "name": "南方中证申万有色金属A",
+        "type": "场外",
+        "tracker": "中证申万有色金属指数",
+        "scale": "20亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "黄金": {
+    "name": "黄金",
+    "funds": [
+      {
+        "code": "518880",
+        "name": "黄金ETF",
+        "type": "ETF",
+        "tracker": "上海金交易所黄金合约",
+        "scale": "400亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159934",
+        "name": "黄金ETF",
+        "type": "ETF",
+        "tracker": "上海金交所Au99.99",
+        "scale": "150亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000216",
+        "name": "华安黄金易联接A",
+        "type": "场外",
+        "tracker": "上海金交所Au99.99",
+        "scale": "80亿",
+        "expense": "0.60%"
+      }
+    ]
+  },
+  "消费": {
+    "name": "消费",
+    "funds": [
+      {
+        "code": "159928",
+        "name": "消费ETF",
+        "type": "ETF",
+        "tracker": "中证主要消费指数",
+        "scale": "100亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159927",
+        "name": "主要消费ETF",
+        "type": "ETF",
+        "tracker": "中证主要消费指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000248",
+        "name": "消费ETF联接A",
+        "type": "场外",
+        "tracker": "中证主要消费指数",
+        "scale": "80亿",
+        "expense": "0.60%"
+      },
+      {
+        "code": "000789",
+        "name": "易方达消费行业股票A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "250亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "白酒": {
+    "name": "白酒",
+    "funds": [
+      {
+        "code": "512670",
+        "name": "酒ETF",
+        "type": "ETF",
+        "tracker": "中证酒类 subdir指数",
+        "scale": "120亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159700",
+        "name": "酒ETF基金",
+        "type": "ETF",
+        "tracker": "中证酒类 subdir指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001975",
+        "name": "招商中证白酒指数A",
+        "type": "场外",
+        "tracker": "中证酒类 subdir指数",
+        "scale": "300亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "科技": {
+    "name": "科技",
+    "funds": [
+      {
+        "code": "515000",
+        "name": "科技50ETF",
+        "type": "ETF",
+        "tracker": "中证科技50指数",
+        "scale": "50亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "515880",
+        "name": "科技ETF",
+        "type": "ETF",
+        "tracker": "中证科技100指数",
+        "scale": "35亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001389",
+        "name": "广发科技动力混合A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "25亿",
+        "expense": "1.50%"
+      }
+    ]
+  },
+  "通信": {
+    "name": "通信",
+    "funds": [
+      {
+        "code": "515880",
+        "name": "通信ETF",
+        "type": "ETF",
+        "tracker": "中证全指通信设备指数",
+        "scale": "20亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001812",
+        "name": "中银通信A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "10亿",
+        "expense": "1.50%"
+      }
+    ]
+  },
+  "军工": {
+    "name": "军工",
+    "funds": [
+      {
+        "code": "512660",
+        "name": "军工ETF",
+        "type": "ETF",
+        "tracker": "中证军工指数",
+        "scale": "150亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512660",
+        "name": "国防ETF",
+        "type": "ETF",
+        "tracker": "中证国防指数",
+        "scale": "30亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "001475",
+        "name": "前海开源军工主题混合A",
+        "type": "场外",
+        "tracker": "主动管理",
+        "scale": "15亿",
+        "expense": "1.50%"
+      }
+    ]
+  },
+  "房地产": {
+    "name": "房地产",
+    "funds": [
+      {
+        "code": "512200",
+        "name": "房地产ETF",
+        "type": "ETF",
+        "tracker": "中证房地产指数",
+        "scale": "25亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000807",
+        "name": "广发中证房地产指数发起式A",
+        "type": "场外",
+        "tracker": "中证房地产指数",
+        "scale": "10亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "煤炭": {
+    "name": "煤炭",
+    "funds": [
+      {
+        "code": "515220",
+        "name": "煤炭ETF",
+        "type": "ETF",
+        "tracker": "中证煤炭指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "161032",
+        "name": "富国中证煤炭指数A",
+        "type": "场外",
+        "tracker": "中证煤炭指数",
+        "scale": "20亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "证券": {
+    "name": "证券",
+    "funds": [
+      {
+        "code": "512000",
+        "name": "证券ETF",
+        "type": "ETF",
+        "tracker": "中证全指证券公司指数",
+        "scale": "300亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "保险": {
+    "name": "保险",
+    "funds": [
+      {
+        "code": "512070",
+        "name": "保险ETF",
+        "type": "ETF",
+        "tracker": "中证保险指数",
+        "scale": "20亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "医药": {
+    "name": "医药",
+    "funds": [
+      {
+        "code": "512290",
+        "name": "医疗ETF",
+        "type": "ETF",
+        "tracker": "中证医疗指数",
+        "scale": "200亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159992",
+        "name": "创新药ETF",
+        "type": "ETF",
+        "tracker": "中证创新药指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "芯片": {
+    "name": "芯片",
+    "funds": [
+      {
+        "code": "512480",
+        "name": "芯片ETF",
+        "type": "ETF",
+        "tracker": "中华半导体芯片指数",
+        "scale": "85亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159995",
+        "name": "芯片ETF",
+        "type": "ETF",
+        "tracker": "国证芯片指数",
+        "scale": "70亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "计算机": {
+    "name": "计算机",
+    "funds": [
+      {
+        "code": "512690",
+        "name": "计算机ETF",
+        "type": "ETF",
+        "tracker": "中证计算机主题指数",
+        "scale": "55亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "512480",
+        "name": "软件ETF",
+        "type": "ETF",
+        "tracker": "中证软件服务指数",
+        "scale": "25亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "电子": {
+    "name": "电子",
+    "funds": [
+      {
+        "code": "515260",
+        "name": "电子ETF",
+        "type": "ETF",
+        "tracker": "中证全指电子信息指数",
+        "scale": "35亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "光伏": {
+    "name": "光伏",
+    "funds": [
+      {
+        "code": "515790",
+        "name": "光伏ETF",
+        "type": "ETF",
+        "tracker": "中证光伏指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "516180",
+        "name": "光伏设备ETF",
+        "type": "ETF",
+        "tracker": "中证光伏产业指数",
+        "scale": "30亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "储能": {
+    "name": "储能",
+    "funds": [
+      {
+        "code": "159566",
+        "name": "储能ETF",
+        "type": "ETF",
+        "tracker": "中证储能产业指数",
+        "scale": "15亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "电池": {
+    "name": "电池",
+    "funds": [
+      {
+        "code": "159755",
+        "name": "电池ETF",
+        "type": "ETF",
+        "tracker": "中证新能电池指数",
+        "scale": "20亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "汽车": {
+    "name": "汽车",
+    "funds": [
+      {
+        "code": "516110",
+        "name": "汽车ETF",
+        "type": "ETF",
+        "tracker": "中证汽车指数",
+        "scale": "30亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "162717",
+        "name": "广发中证全指汽车指数A",
+        "type": "场外",
+        "tracker": "中证全指汽车指数",
+        "scale": "10亿",
+        "expense": "1.20%"
+      }
+    ]
+  },
+  "通信设备": {
+    "name": "通信设备",
+    "funds": [
+      {
+        "code": "515880",
+        "name": "通信ETF",
+        "type": "ETF",
+        "tracker": "中证全指通信设备指数",
+        "scale": "20亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "传媒": {
+    "name": "传媒",
+    "funds": [
+      {
+        "code": "512980",
+        "name": "传媒ETF",
+        "type": "ETF",
+        "tracker": "中证传媒指数",
+        "scale": "25亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "游戏": {
+    "name": "游戏",
+    "funds": [
+      {
+        "code": "517690",
+        "name": "游戏ETF",
+        "type": "ETF",
+        "tracker": "中证游戏指数",
+        "scale": "10亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "互联网": {
+    "name": "互联网",
+    "funds": [
+      {
+        "code": "513030",
+        "name": "恒生互联网ETF",
+        "type": "ETF",
+        "tracker": "恒生互联网科技指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "港股": {
+    "name": "港股",
+    "funds": [
+      {
+        "code": "513500",
+        "name": "恒生ETF",
+        "type": "ETF",
+        "tracker": "恒生指数",
+        "scale": "100亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "513330",
+        "name": "恒生科技ETF",
+        "type": "ETF",
+        "tracker": "恒生科技指数",
+        "scale": "200亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "美股": {
+    "name": "美股",
+    "funds": [
+      {
+        "code": "513500",
+        "name": "标普ETF",
+        "type": "ETF",
+        "tracker": "标普500指数",
+        "scale": "150亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "513100",
+        "name": "纳指ETF",
+        "type": "ETF",
+        "tracker": "纳斯达克100指数",
+        "scale": "180亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "创业板的": {
+    "name": "创业板",
+    "funds": [
+      {
+        "code": "159915",
+        "name": "创业板ETF",
+        "type": "ETF",
+        "tracker": "创业板指",
+        "scale": "250亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "159730",
+        "name": "创业板50ETF",
+        "type": "ETF",
+        "tracker": "创业板50指数",
+        "scale": "80亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "科创板": {
+    "name": "科创板",
+    "funds": [
+      {
+        "code": "588000",
+        "name": "科创50ETF",
+        "type": "ETF",
+        "tracker": "科创50指数",
+        "scale": "300亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "588080",
+        "name": "科创100ETF",
+        "type": "ETF",
+        "tracker": "科创100指数",
+        "scale": "50亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "中字头": {
+    "name": "中字头",
+    "funds": [
+      {
+        "code": "512030",
+        "name": "央企ETF",
+        "type": "ETF",
+        "tracker": "中证央企指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "中字头": {
+    "name": "中字头",
+    "funds": [
+      {
+        "code": "512030",
+        "name": "央企ETF",
+        "type": "ETF",
+        "tracker": "中证央企指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "国企改革": {
+    "name": "国企改革",
+    "funds": [
+      {
+        "code": "512560",
+        "name": "国企改革ETF",
+        "type": "ETF",
+        "tracker": "中证国企改革指数",
+        "scale": "15亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "中字头": {
+    "name": "中字头",
+    "funds": [
+      {
+        "code": "512030",
+        "name": "央企ETF",
+        "type": "ETF",
+        "tracker": "中证央企指数",
+        "scale": "40亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "中特估": {
+    "name": "中特估",
+    "funds": [
+      {
+        "code": "159683",
+        "name": "中特估ETF",
+        "type": "ETF",
+        "tracker": "中证特估指数",
+        "scale": "10亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "高股息": {
+    "name": "高股息",
+    "funds": [
+      {
+        "code": "515180",
+        "name": "红利ETF",
+        "type": "ETF",
+        "tracker": "中证红利指数",
+        "scale": "120亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "000247",
+        "name": "中证红利ETF联接A",
+        "type": "场外",
+        "tracker": "中证红利指数",
+        "scale": "50亿",
+        "expense": "0.60%"
+      }
+    ]
+  },
+  "红利": {
+    "name": "红利",
+    "funds": [
+      {
+        "code": "515180",
+        "name": "红利ETF",
+        "type": "ETF",
+        "tracker": "中证红利指数",
+        "scale": "120亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "小盘": {
+    "name": "小盘",
+    "funds": [
+      {
+        "code": "512160",
+        "name": "中证1000ETF",
+        "type": "ETF",
+        "tracker": "中证1000指数",
+        "scale": "60亿",
+        "expense": "0.50%"
+      }
+    ]
+  },
+  "大盘": {
+    "name": "大盘",
+    "funds": [
+      {
+        "code": "510300",
+        "name": "沪深300ETF",
+        "type": "ETF",
+        "tracker": "沪深300指数",
+        "scale": "500亿",
+        "expense": "0.50%"
+      },
+      {
+        "code": "510500",
+        "name": "中证500ETF",
+        "type": "ETF",
+        "tracker": "中证500指数",
+        "scale": "400亿",
+        "expense": "0.50%"
+      }
+    ]
+  }
+}
