@@ -1,4 +1,4 @@
-"""报告生成模块 - 终端输出+图表导出"""
+"""报告生成模块 - 终端输出 + 图表导出"""
 
 import os
 from datetime import datetime
@@ -39,7 +39,6 @@ class ReportGenerator:
         """生成概览报告"""
         self.print_header("基金板块分析报告 - 总览")
 
-        # 按评级分组
         ratings = {}
         for a in sector_analyses:
             r = a.get("rating", "unknown")
@@ -47,7 +46,6 @@ class ReportGenerator:
                 ratings[r] = []
             ratings[r].append(a)
 
-        # 打印各评级板块
         rating_order = ["strong_buy", "buy", "hold", "cautious", "avoid"]
         rating_labels = {
             "strong_buy": "[强烈推荐]",
@@ -62,10 +60,10 @@ class ReportGenerator:
             if not items:
                 continue
 
-            print(f"\n[强烈推荐] ({len(items)}个板块)")
+            print(f"\n{rating_labels[rating]} ({len(items)}个板块)")
             print("-" * 50)
 
-            for item in items[:10]:  # 每个评级最多显示10个
+            for item in items[:10]:
                 name = item.get("name", "未知")
                 change = item.get("change_pct", 0)
                 rsi = item.get("rsi", 0)
@@ -90,21 +88,18 @@ class ReportGenerator:
         """生成详细分析报告"""
         self.print_header("基金板块详细分析报告")
 
-        # 排序
         sorted_analyses = sorted(
             sector_analyses,
             key=lambda x: x.get("rating_score", 0),
             reverse=True,
         )
 
-        # 推荐板块
         print(f"\n[推荐板块 Top {top_n}]")
         print("=" * 60)
 
         for i, analysis in enumerate(sorted_analyses[:top_n], 1):
             self._print_sector_detail(analysis, is_top=True)
 
-        # 回避板块
         print(f"\n[建议回避板块 Top {top_n}]")
         print("=" * 60)
 
@@ -137,7 +132,7 @@ class ReportGenerator:
         print(f"  评级: {rating_text} (得分: {score})")
         print(f"  涨跌: {'+' if change >= 0 else ''}{change}%  "
               f"RSI: {rsi}  "
-               f"趋势: {'[上升]' if trend == 'uptrend' else '[下降]' if trend == 'downtrend' else '[震荡]'}")
+              f"趋势: {'[上升]' if trend == 'uptrend' else '[下降]' if trend == 'downtrend' else '[震荡]'}")
         print(f"  量比: {volume_ratio}  "
               f"资金: {'+' if net_flow >= 0 else ''}{net_flow:.0f}万")
 
@@ -151,7 +146,6 @@ class ReportGenerator:
             for s in sell_sugs:
                 print(f"    • {s}")
 
-        # 匹配基金
         funds = self.fund_matcher.find_funds_by_sector(name)
         if funds:
             print(f"  相关基金:")
@@ -162,7 +156,6 @@ class ReportGenerator:
         """生成操作建议报告"""
         self.print_header("基金买卖操作建议")
 
-        # 买入推荐
         buy_items = [
             m for m in matched_data
             if m["analysis"].get("rating") in ("strong_buy", "buy")
@@ -183,7 +176,6 @@ class ReportGenerator:
                     for fund in funds[:2]:
                         print(f"    {self.fund_matcher.format_fund_info(fund)}")
 
-        # 卖出/回避
         sell_items = [
             m for m in matched_data
             if m["analysis"].get("rating") in ("cautious", "avoid")
@@ -204,7 +196,6 @@ class ReportGenerator:
                     for fund in funds[:2]:
                         print(f"    {self.fund_matcher.format_fund_info(fund)}")
 
-        # 观望
         hold_items = [
             m for m in matched_data
             if m["analysis"].get("rating") == "hold"
@@ -221,14 +212,7 @@ class ReportGenerator:
         self.print_footer()
 
     def generate_text_report(self, sector_analyses, matched_data, filepath):
-        """
-        生成纯文本报告并保存到文件
-
-        Args:
-            sector_analyses: 板块分析结果
-            matched_data: 匹配的板块-基金数据
-            filepath: 保存路径
-        """
+        """生成纯文本报告并保存到文件"""
         lines = []
 
         lines.append("=" * 70)
@@ -236,7 +220,6 @@ class ReportGenerator:
         lines.append(f"           生成时间: {self.timestamp}")
         lines.append("=" * 70)
 
-        # 排序
         sorted_analyses = sorted(
             sector_analyses,
             key=lambda x: x.get("rating_score", 0),
@@ -278,7 +261,6 @@ class ReportGenerator:
         lines.append("\n" + "=" * 70)
         lines.append("⚠️ 本报告仅供参考，不构成投资建议")
 
-        # 写入文件
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines))
@@ -288,7 +270,7 @@ class ReportGenerator:
             return None
 
     def generate_csv_report(self, sector_analyses, filepath):
-        """生成CSV格式报告"""
+        """生成 CSV 格式报告"""
         try:
             import csv
 
@@ -296,11 +278,11 @@ class ReportGenerator:
             for a in sector_analyses:
                 rows.append({
                     "板块名称": a.get("name", ""),
-                    "涨跌幅(%)": a.get("change_pct", 0),
+                    "涨跌幅 (%)": a.get("change_pct", 0),
                     "RSI": a.get("rsi", 0),
                     "趋势": a.get("trend", ""),
                     "量比": a.get("volume_ratio", 0),
-                    "资金流向(万)": a.get("net_flow", 0),
+                    "资金流向 (万)": a.get("net_flow", 0),
                     "评级": self.analyzer.get_rating_text(a.get("rating", "unknown")),
                     "评分": a.get("rating_score", 0),
                 })
@@ -312,5 +294,123 @@ class ReportGenerator:
 
             return filepath
         except Exception as e:
-            print(f"[错误] 生成CSV报告失败: {e}")
+            print(f"[错误] 生成 CSV 报告失败: {e}")
             return None
+
+
+def show_indices_report(index_fetcher, fund_matcher):
+    """显示指数行情报告"""
+    print("\n[1/2] 正在获取指数数据...")
+
+    a_indices = index_fetcher.fetch_a_stock_indices()
+    global_indices = index_fetcher.fetch_global_indices()
+
+    print("[2/2] 生成指数行情报告...")
+
+    print("\n" + "=" * 70)
+    print("       全球主要指数行情")
+    print("       生成时间:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("=" * 70)
+
+    print("\n【A 股主要指数】")
+    print("-" * 70)
+    print(f"  {'指数名称':<10} {'最新价':>12} {'涨跌幅':>10} {'成交额 (亿)':>12}")
+    print("-" * 70)
+
+    for idx in a_indices:
+        name = idx['name']
+        price = idx['price']
+        change = idx['change_pct']
+        volume = idx['volume'] / 100000000 if idx['volume'] > 0 else 0
+
+        change_str = f"+{change:.2f}%" if change >= 0 else f"{change:.2f}%"
+        vol_str = f"{volume:,.2f}"
+
+        print(f"  {name:<10} {price:>12,.2f} {change_str:>10} {vol_str:>12}")
+
+    print("\n【全球主要指数】")
+    print("-" * 70)
+    print(f"  {'指数名称':<10} {'最新价':>12} {'涨跌幅':>10}")
+    print("-" * 70)
+
+    for idx in global_indices:
+        name = idx['name']
+        price = idx['price']
+        change = idx['change_pct']
+
+        change_str = f"+{change:.2f}%" if change >= 0 else f"{change:.2f}%"
+        print(f"  {name:<10} {price:>12,.2f} {change_str:>10}")
+
+    print("\n" + "-" * 70)
+    print("  数据来源：新浪财经 | 更新时间：交易时段实时")
+    print("  全球指数数据为模拟值，仅供参考")
+    print("-" * 70)
+
+
+def show_flows_report(source_manager, fund_matcher):
+    """显示资金流向报告"""
+    print("\n[1/3] 正在获取资金流向数据...")
+
+    industry_df = source_manager.fetch_fund_flow('industry')
+    concept_df = source_manager.fetch_fund_flow('concept')
+
+    print("[2/3] 处理资金流向数据...")
+    print("[3/3] 生成资金流向报告...")
+
+    print("\n" + "=" * 80)
+    print("       今日板块资金流向")
+    print("       生成时间:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("=" * 80)
+
+    if industry_df is not None and len(industry_df) > 0:
+        print("\n【行业板块资金流向 TOP 15（主力净流入）】")
+        print("-" * 80)
+        print(f"  {'排名':<6}{'板块名称':<12}{'涨跌幅':>10}{'主力净流入 (亿)':>14}")
+        print("-" * 80)
+
+        top_n = min(15, len(industry_df))
+        for i in range(top_n):
+            try:
+                row = industry_df.iloc[i]
+                rank = int(row.iloc[0])
+                name = str(row.iloc[1])
+                change_pct = float(row.iloc[3])
+                main_net = float(row.iloc[6])
+
+                change_str = f"+{change_pct:.2f}%" if change_pct >= 0 else f"{change_pct:.2f}%"
+                net_str = f"{main_net:.2f}"
+
+                print(f"  #{rank:<4} {name:<12} {change_str:>10} {net_str:>14}")
+            except Exception as e:
+                print(f"    错误: {e}")
+                import traceback
+                traceback.print_exc()
+                continue
+
+    if concept_df is not None and len(concept_df) > 0:
+        print("\n【概念板块资金流向 TOP 10（主力净流入）】")
+        print("-" * 80)
+        print(f"  {'排名':<6}{'板块名称':<12}{'涨跌幅':>10}{'主力净流入 (亿)':>14}")
+        print("-" * 80)
+
+        top_n = min(10, len(concept_df))
+        for i in range(top_n):
+            try:
+                row = concept_df.iloc[i]
+                rank = int(row.iloc[0])
+                name = str(row.iloc[1])
+                change_pct = float(row.iloc[3])
+                main_net = float(row.iloc[6])
+
+                change_str = f"+{change_pct:.2f}%" if change_pct >= 0 else f"{change_pct:.2f}%"
+                net_str = f"{main_net:.2f}"
+
+                print(f"  #{rank:<4} {name:<12} {change_str:>10} {net_str:>14}")
+            except Exception as e:
+                print(f"    错误: {e}")
+                continue
+
+    print("\n" + "-" * 80)
+    print("  数据来源：新浪财经 | 更新时间：交易时段实时")
+    print("  单位：亿元")
+    print("-" * 80)

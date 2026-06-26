@@ -2,7 +2,6 @@
 
 import argparse
 import sys
-import os
 import io
 
 # 设置控制台编码为 UTF-8
@@ -12,9 +11,11 @@ if sys.platform == 'win32':
 from datetime import datetime
 
 from core.data_fetcher import DataFetcher
+from core.data_source_manager import DataSourceManager
+from core.index_fetcher import IndexFetcher
 from core.analyzer import SectorAnalyzer
 from core.fund_matcher import FundMatcher
-from core.reporter import ReportGenerator
+from core.reporter import ReportGenerator, show_indices_report, show_flows_report
 from core.chart_generator import ChartGenerator
 
 
@@ -29,10 +30,12 @@ def parse_args():
   python main.py --full-report            # 详细分析报告
   python main.py --suggestions            # 买卖建议
   python main.py --sector 半导体          # 查看指定板块
-  python main.py --watch --interval 60    # 实时监控(60秒刷新)
+  python main.py --watch --interval 60    # 实时监控 (60 秒刷新)
   python main.py --output report.txt      # 导出文本报告
-  python main.py --csv output.csv         # 导出CSV报告
+  python main.py --csv output.csv         # 导出 CSV 报告
   python main.py --charts ./charts        # 生成图表
+  python main.py --indices                # 查看全球指数行情
+  python main.py --flows                  # 查看资金流向
   python main.py --full-report --charts ./charts --output report.txt  # 完整模式
         """,
     )
@@ -61,7 +64,7 @@ def parse_args():
         "--interval",
         type=int,
         default=60,
-        help="监控刷新间隔(秒)，默认60秒",
+        help="监控刷新间隔 (秒)，默认 60 秒",
     )
     parser.add_argument(
         "--output",
@@ -71,7 +74,7 @@ def parse_args():
     parser.add_argument(
         "--csv",
         type=str,
-        help="导出CSV报告文件路径",
+        help="导出 CSV 报告文件路径",
     )
     parser.add_argument(
         "--charts",
@@ -82,7 +85,17 @@ def parse_args():
         "--top",
         type=int,
         default=20,
-        help="显示板块数量，默认20个",
+        help="显示板块数量，默认 20 个",
+    )
+    parser.add_argument(
+        "--indices",
+        action="store_true",
+        help="查看全球主要指数行情",
+    )
+    parser.add_argument(
+        "--flows",
+        action="store_true",
+        help="查看板块资金流向",
     )
 
     return parser.parse_args()
@@ -94,7 +107,6 @@ def run_once(fetcher, analyzer, fund_matcher, reporter, chart_gen, args):
 
     # 获取板块数据
     if args.sector:
-        # 查找指定板块
         all_sectors = fetcher.get_all_sectors()
         target = None
         for s in all_sectors:
@@ -111,14 +123,13 @@ def run_once(fetcher, analyzer, fund_matcher, reporter, chart_gen, args):
                 "f14": args.sector, "f3": 0, "f4": 0, "f5": 0, "f6": 1, "f62": 0
             })]
     else:
-        # 获取行业板块涨跌排名
         print("[1/4] 正在通过 AKShare 获取行业板块数据...")
         gainers = fetcher.fetch_top_gainers(limit=args.top // 2)
         losers = fetcher.fetch_top_losers(limit=args.top // 2)
         all_sectors = gainers + losers
-        
+
         if not all_sectors:
-            print("[警告] AKShare 获取失败，使用模拟数据")
+            print("[警告] 所有数据源获取失败，使用模拟数据")
             all_sectors = [
                 {"f14": "半导体", "f3": 3.25, "f4": 2.15},
                 {"f14": "创新药", "f3": 2.80, "f4": 1.95},
@@ -132,7 +143,7 @@ def run_once(fetcher, analyzer, fund_matcher, reporter, chart_gen, args):
                 {"f14": "有色金属", "f3": -2.80, "f4": -1.95},
                 {"f14": "军工", "f3": -3.50, "f4": -2.45},
             ]
-        
+
         analyses = analyzer.analyze_batch(all_sectors)
 
     if not analyses:
@@ -204,9 +215,9 @@ def run_once(fetcher, analyzer, fund_matcher, reporter, chart_gen, args):
         if path:
             print(f"      保存成功: {path}")
 
-    # 导出CSV
+    # 导出 CSV
     if args.csv:
-        print(f"\n[导出] CSV报告: {args.csv}")
+        print(f"\n[导出] CSV 报告: {args.csv}")
         path = reporter.generate_csv_report(analyses, args.csv)
         if path:
             print(f"      保存成功: {path}")
@@ -217,14 +228,140 @@ def run_once(fetcher, analyzer, fund_matcher, reporter, chart_gen, args):
         charts = chart_gen.generate_all_charts(analyses, args.charts)
         if charts:
             for c in charts:
-                print(f"      已生成: {os.path.basename(c)}")
+                print(f"      已生成: {__import__('os').path.basename(c)}")
 
-    return analyses
+
+def show_indices_report(index_fetcher, fund_matcher):
+    """显示指数行情报告"""
+    print("\n[1/2] 正在获取指数数据...")
+
+    # 获取 A 股指数
+    a_indices = index_fetcher.fetch_a_stock_indices()
+
+    # 获取全球指数
+    global_indices = index_fetcher.fetch_global_indices()
+
+    print("[2/2] 生成指数行情报告...")
+
+    print("\n" + "=" * 70)
+    print("       全球主要指数行情")
+    print("       生成时间:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("=" * 70)
+
+    print("\n【A 股主要指数】")
+    print("-" * 70)
+    print(f"  {'指数名称':<10} {'最新价':>12} {'涨跌幅':>10} {'成交额 (亿)':>12}")
+    print("-" * 70)
+
+    for idx in a_indices:
+        name = idx['name']
+        price = idx['price']
+        change = idx['change_pct']
+        volume = idx['volume'] / 100000000 if idx['volume'] > 0 else 0
+
+        change_str = f"+{change:.2f}%" if change >= 0 else f"{change:.2f}%"
+        vol_str = f"{volume:,.2f}"
+
+        print(f"  {name:<10} {price:>12,.2f} {change_str:>10} {vol_str:>12}")
+
+    print("\n【全球主要指数】")
+    print("-" * 70)
+    print(f"  {'指数名称':<10} {'最新价':>12} {'涨跌幅':>10}")
+    print("-" * 70)
+
+    for idx in global_indices:
+        name = idx['name']
+        price = idx['price']
+        change = idx['change_pct']
+
+        change_str = f"+{change:.2f}%" if change >= 0 else f"{change:.2f}%"
+        print(f"  {name:<10} {price:>12,.2f} {change_str:>10}")
+
+    print("\n" + "-" * 70)
+    print("  数据来源：新浪财经 | 更新时间：交易时段实时")
+    print("  全球指数数据为模拟值，仅供参考")
+    print("-" * 70)
+
+
+def show_flows_report(source_manager, fund_matcher):
+    """显示资金流向报告"""
+    print("\n[1/3] 正在获取资金流向数据...")
+
+    # 获取行业资金流向
+    industry_df = source_manager.fetch_fund_flow('industry')
+
+    # 获取概念资金流向
+    concept_df = source_manager.fetch_fund_flow('concept')
+
+    print("[2/3] 处理资金流向数据...")
+    print("[3/3] 生成资金流向报告...")
+
+    print("\n" + "=" * 70)
+    print("       今日板块资金流向")
+    print("       生成时间:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("=" * 70)
+
+    if industry_df is not None and len(industry_df) > 0:
+        print("\n【行业板块资金流向 TOP 15（净流入）】")
+        print("-" * 70)
+        # 获取前 15 个净流入的板块
+        top_n = min(15, len(industry_df))
+        for i in range(top_n):
+            try:
+                rank = industry_df.iloc[i]['序号'] if '序号' in industry_df.columns else i + 1
+                name = industry_df.iloc[i]['行业'] if '行业' in industry_df.columns else '未知'
+                change_pct = industry_df.iloc[i]['行业 - 涨跌幅'] if '行业 - 涨跌幅' in industry_df.columns else 0
+                main_net = industry_df.iloc[i]['主力净流入'] if '主力净流入' in industry_df.columns else 0
+                super_large = industry_df.iloc[i]['超大单'] if '超大单' in industry_df.columns else 0
+                large = industry_df.iloc[i]['大单'] if '大单' in industry_df.columns else 0
+
+                change_str = f"+{change_pct:.2f}%" if change_pct >= 0 else f"{change_pct:.2f}%"
+                net_str = f"{main_net:.2f}" if main_net >= 0 else f"{main_net:.2f}"
+
+                print(f"  #{rank:<3} {name:<12} 涨跌: {change_str:>7}  主力净流入: {net_str:>10} 亿  "
+                      f"(超大单: {super_large:.2f} 亿, 大单: {large:.2f} 亿)")
+            except Exception as e:
+                continue
+
+    if concept_df is not None and len(concept_df) > 0:
+        print("\n【概念板块资金流向 TOP 10（净流入）】")
+        print("-" * 70)
+        top_n = min(10, len(concept_df))
+        for i in range(top_n):
+            try:
+                rank = concept_df.iloc[i]['序号'] if '序号' in concept_df.columns else i + 1
+                name = concept_df.iloc[i]['行业'] if '行业' in concept_df.columns else '未知'
+                change_pct = concept_df.iloc[i]['行业 - 涨跌幅'] if '行业 - 涨跌幅' in concept_df.columns else 0
+                main_net = concept_df.iloc[i]['主力净流入'] if '主力净流入' in concept_df.columns else 0
+
+                change_str = f"+{change_pct:.2f}%" if change_pct >= 0 else f"{change_pct:.2f}%"
+                net_str = f"{main_net:.2f}" if main_net >= 0 else f"{main_net:.2f}"
+
+                print(f"  #{rank:<3} {name:<12} 涨跌: {change_str:>7}  主力净流入: {net_str:>10} 亿")
+            except Exception as e:
+                continue
+
+    print("\n" + "-" * 70)
+    print("  数据来源：新浪财经 | 更新时间：交易时段实时")
+    print("  单位：亿元")
+    print("-" * 70)
 
 
 def main():
     """主函数"""
     args = parse_args()
+
+    # 指数行情
+    if args.indices:
+        index_fetcher = IndexFetcher()
+        show_indices_report(index_fetcher, None)
+        return
+
+    # 资金流向
+    if args.flows:
+        source_manager = DataSourceManager()
+        show_flows_report(source_manager, None)
+        return
 
     # 初始化模块
     fetcher = DataFetcher()
@@ -236,7 +373,7 @@ def main():
     # 显示启动信息
     print("\n" + "=" * 60)
     print("       基金板块分析助手")
-    print("       数据来源: 东方财富API")
+    print("       数据来源: AKShare（东方财富 + 同花顺 + 新浪财经）")
     print("=" * 60)
 
     # 显示基金库覆盖情况

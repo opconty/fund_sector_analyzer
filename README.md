@@ -4,6 +4,8 @@
 
 后续集成到 AI Agent 中使用，可参考[https://github.com/opconty/laygin_skills](https://github.com/opconty/laygin_skills)
 
+应用案例：[基金板块股市行情分析助手技能，聊聊天就能长知识](https://mp.weixin.qq.com/s/9YxpBcOLA8JK30arruV9Ng)
+
 ## 功能特性
 
 - **多数据源** - 自动切换东方财富、同花顺等数据源，网络不佳时自动切换
