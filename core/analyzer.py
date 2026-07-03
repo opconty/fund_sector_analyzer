@@ -177,11 +177,22 @@ class SectorAnalyzer:
     def _analyze_net_flow(self, sector_data):
         """分析资金流向"""
         # 东方财富数据中资金流向字段
-        net_flow = sector_data.get("f62", 0) or sector_data.get("f21", 0) or 0
+        net_flow = sector_data.get("f62", 0) or sector_data.get("f21", 0) or sector_data.get("f4", 0) or 0
+
+        # 如果数据中有'资金流向'字段（来自同花顺/新浪统一格式）
+        if '资金流向' in sector_data:
+            net_flow = sector_data['资金流向']
+        
+        # 如果数据中有'净额'字段（新浪财经格式，单位可能是亿）
+        if '净额' in sector_data:
+            net_flow = sector_data['净额']
+            # 如果是亿元单位，转换为万元
+            if abs(net_flow) > 10000:
+                net_flow = net_flow * 10000
 
         # 转换为万元
         if net_flow != 0:
-            return round(net_flow / 10000, 2)
+            return round(net_flow, 2)
         return 0
 
     def _calculate_rating(self, change_pct, rsi, trend, volume_ratio, net_flow):
